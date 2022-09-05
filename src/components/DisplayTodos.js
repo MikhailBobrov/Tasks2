@@ -28,7 +28,7 @@ export const DisplayTodos = (props) => {
                   key={item.id}
                   item={item}
                   removeTodo={() => removeTodo(item.id)}
-                  updateTodo={() => updateTodo(item)}
+                  updateTodo={() => updateTodo(item.item)}
                 />
               )
             );
@@ -45,7 +45,7 @@ export const DisplayTodos = (props) => {
                   key={item.id}
                   item={item}
                   removeTodo={() => removeTodo(item.id)}
-                  updateTodo={() => updateTodo(item)}
+                  updateTodo={() => updateTodo(item.item)}
                 />
               )
             );
@@ -62,7 +62,7 @@ export const DisplayTodos = (props) => {
                   key={item.id}
                   item={item}
                   removeTodo={() => removeTodo(item.id)}
-                  updateTodo={() => updateTodo(item)}
+                  updateTodo={() => updateTodo(item.item)}
                 />
               )
             );

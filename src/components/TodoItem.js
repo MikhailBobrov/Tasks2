@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { AiFillEdit } from "react-icons/ai";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IoCheckmarkDoneSharp, IoClose } from "react-icons/io5";
 import {
   removeTodoAction,
@@ -20,9 +20,7 @@ const TodoItem = (props) => {
 
   const update = (id, value, e) => {
     if (e.which === 13) {
-      //here 13 is key code for enter key
-      // updateTodo({ id, item: value });
-      updateTodoAction({ id, value });
+      dispatch(updateTodoAction({ id, item: value }));
       inputRef.current.disabled = true;
     }
   };
