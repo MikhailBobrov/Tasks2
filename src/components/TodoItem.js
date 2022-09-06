@@ -24,6 +24,11 @@ const TodoItem = (props) => {
       inputRef.current.disabled = true;
     }
   };
+
+  const completedTodo = (id, completed) => {
+    dispatch(completeTodoAction({ id, completed: completed }));
+  };
+
   return (
     <li key={item.id} className="card">
       <textarea
@@ -36,6 +41,14 @@ const TodoItem = (props) => {
         <button onClick={() => changeFocus()}>
           <AiFillEdit />
         </button>
+        {item.completed === false && (
+          <button
+            style={{ color: "green" }}
+            onClick={() => completedTodo(item.id, item.completed)}
+          >
+            <IoCheckmarkDoneSharp />
+          </button>
+        )}
         <button
           style={{ color: "red" }}
           onClick={() => dispatch(removeTodoAction(item.id))}
@@ -43,6 +56,7 @@ const TodoItem = (props) => {
           <IoClose />
         </button>
       </div>
+      {item.completed && <span className="completed">done</span>}
     </li>
   );
 };
