@@ -50,7 +50,6 @@ export const DisplayTodos = (props) => {
           {tasksData.map((item) => {
             return (
               item.completed === false &&
-              sort &&
               item.status === status.todo && (
                 <TodoItem
                   key={item.id}
@@ -69,7 +68,6 @@ export const DisplayTodos = (props) => {
           {tasksData.map((item) => {
             return (
               item.completed === false &&
-              sort &&
               item.status === status.inprogress && (
                 <TodoItem
                   key={item.id}
@@ -88,7 +86,6 @@ export const DisplayTodos = (props) => {
           {tasksData.map((item) => {
             return (
               item.completed === false &&
-              sort &&
               item.status === status.done && (
                 <TodoItem
                   key={item.id}

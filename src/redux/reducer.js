@@ -45,19 +45,10 @@ export const reducer = (state = defaultState, action) => {
       };
     }
     case SORT_TODO: {
+      const sortedData = state.tasks.sort((a, b) => a.priority > b.priority);
       return {
         ...state,
-        tasks: state.tasks.map((todo) => {
-          if (todo.priority === action.payload.priority) {
-            return {
-              ...todo,
-              tasks: state.tasks.filter(
-                (task) => task.priority === action.payload.priority
-              ),
-            };
-          }
-          return todo;
-        }),
+        tasks: sortedData,
       };
     }
     default:
