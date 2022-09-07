@@ -54,7 +54,7 @@ export const reducer = (state = defaultState, action) => {
       );
       console.log(sortedData);
       return {
-        // ...state,
+        ...state,
         tasks: [...sortedData],
       };
     }
