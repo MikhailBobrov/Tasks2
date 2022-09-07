@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { status, priority } from "../redux/constant";
+import { status, statusOfPriority } from "../redux/constant";
 import { addTodoAction } from "../redux/reducer";
 
 export const Todos = (props) => {
@@ -19,7 +19,7 @@ export const Todos = (props) => {
           completed: false,
           status: status.todo,
           date: new Date(),
-          priority: priority.low,
+          statusOfPriority: statusOfPriority.low,
         })
       );
       setTodo("");

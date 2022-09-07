@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
-import { status, priority } from "../redux/constant";
+import { status, statusOfPriority } from "../redux/constant";
 import {
   removeTodoAction,
   updateTodoAction,
@@ -11,7 +11,7 @@ import {
 
 export const DisplayTodos = (props) => {
   const tasksData = useSelector((state) => state.tasks);
-  const [sort, setSort] = useState("");
+  const [sort, setSort] = useState("low");
   const dispatch = useDispatch();
   const removeTodo = (id) => {
     dispatch(removeTodoAction(id));
@@ -32,73 +32,75 @@ export const DisplayTodos = (props) => {
   return (
     <div className="displaytodos">
       <div className="buttons">
-        <button onClick={() => setSort(dispatch(sortTodoAction("low")))}>
+        <button onClick={() => dispatch(sortTodoAction("low"))}>
           Low Priority
         </button>
 
-        <button onClick={() => setSort(dispatch(sortTodoAction("middle")))}>
+        <button onClick={() => dispatch(sortTodoAction("middle"))}>
           Medium Priority
         </button>
 
-        <button onClick={() => setSort(dispatch(sortTodoAction("high")))}>
+        <button onClick={() => dispatch(sortTodoAction("high"))}>
           High Priority
         </button>
       </div>
-      <div className="displaytodos__wrapper">
-        <div className="displaytodos__block">
-          <h2>ToDo</h2>
-          {tasksData.map((item) => {
-            return (
-              item.completed === false &&
-              item.status === status.todo && (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  removeTodo={() => removeTodo(item.id)}
-                  updateTodo={() => updateTodo(item)}
-                  completeTodo={() => completeTodo(item.id)}
-                />
-              )
-            );
-          })}
-        </div>
+      {sort && (
+        <div className="displaytodos__wrapper">
+          <div className="displaytodos__block">
+            <h2>ToDo</h2>
+            {tasksData.map((item) => {
+              return (
+                item.completed === false &&
+                item.status === status.todo && (
+                  <TodoItem
+                    key={item.id}
+                    item={item}
+                    removeTodo={() => removeTodo(item.id)}
+                    updateTodo={() => updateTodo(item)}
+                    completeTodo={() => completeTodo(item.id)}
+                  />
+                )
+              );
+            })}
+          </div>
 
-        <div className="displaytodos__block">
-          <h2>inProgress</h2>
-          {tasksData.map((item) => {
-            return (
-              item.completed === false &&
-              item.status === status.inprogress && (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  removeTodo={() => removeTodo(item.id)}
-                  updateTodo={() => updateTodo(item)}
-                  completeTodo={() => completeTodo(item.id)}
-                />
-              )
-            );
-          })}
-        </div>
+          <div className="displaytodos__block">
+            <h2>inProgress</h2>
+            {tasksData.map((item) => {
+              return (
+                item.completed === false &&
+                item.status === status.inprogress && (
+                  <TodoItem
+                    key={item.id}
+                    item={item}
+                    removeTodo={() => removeTodo(item.id)}
+                    updateTodo={() => updateTodo(item)}
+                    completeTodo={() => completeTodo(item.id)}
+                  />
+                )
+              );
+            })}
+          </div>
 
-        <div className="displaytodos__block">
-          <h2>Done</h2>
-          {tasksData.map((item) => {
-            return (
-              item.completed === false &&
-              item.status === status.done && (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  removeTodo={() => removeTodo(item.id)}
-                  updateTodo={() => updateTodo(item)}
-                  completeTodo={() => completeTodo(item.id)}
-                />
-              )
-            );
-          })}
+          <div className="displaytodos__block">
+            <h2>Done</h2>
+            {tasksData.map((item) => {
+              return (
+                item.completed === false &&
+                item.status === status.done && (
+                  <TodoItem
+                    key={item.id}
+                    item={item}
+                    removeTodo={() => removeTodo(item.id)}
+                    updateTodo={() => updateTodo(item)}
+                    completeTodo={() => completeTodo(item.id)}
+                  />
+                )
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -4,8 +4,8 @@ export const status = {
   done: "done",
 };
 
-export const priority = {
-  low: "low",
-  middle: "middle",
-  high: "high",
+export const statusOfPriority = {
+  low: 1,
+  middle: 2,
+  high: 3,
 };

@@ -1,4 +1,5 @@
 import { defaultState } from "./index";
+import { statusOfPriority } from "./constant";
 
 const ADD_TODO = "ADDTODO";
 const REMOVE_TODO = "REMOVETODO";
@@ -45,10 +46,15 @@ export const reducer = (state = defaultState, action) => {
       };
     }
     case SORT_TODO: {
-      const sortedData = state.tasks.sort((a, b) => a.priority > b.priority);
+      const sortedData = state.tasks.sort(
+        (a, b) =>
+          statusOfPriority[a.statusOfPriority] -
+          statusOfPriority[b.statusOfPriority]
+      );
+      console.log(sortedData);
       return {
         ...state,
-        tasks: sortedData,
+        tasks: [...sortedData],
       };
     }
     default:

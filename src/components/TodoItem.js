@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { AiFillEdit } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { IoCheckmarkDoneSharp, IoClose } from "react-icons/io5";
 import {
   removeTodoAction,
