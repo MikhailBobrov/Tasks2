@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
 import { status, statusOfPriority } from "../redux/constant";
@@ -7,11 +7,12 @@ import {
   updateTodoAction,
   completeTodoAction,
   sortTodoAction,
+  changeTodoPriorityAction,
 } from "../redux/reducer";
 
 export const DisplayTodos = (props) => {
   const tasksData = useSelector((state) => state.tasks);
-  const [sort, setSort] = useState("low");
+  const [show, setShow] = useState(true);
   const dispatch = useDispatch();
   const removeTodo = (id) => {
     dispatch(removeTodoAction(id));
@@ -22,29 +23,36 @@ export const DisplayTodos = (props) => {
   const completeTodo = (id) => {
     dispatch(completeTodoAction(id));
   };
+  const changePriority = (priority) => {
+    dispatch(changeTodoPriorityAction(priority));
+  };
 
-  // const setSort = (t) => {
-  //   console.log(t);
-  //   dispatch(sortTodoAction(t));
-  // };
+  if (tasksData.statusOfPriority === 1) {
+    setShow(false);
+  } else if (tasksData.statusOfPriority === 2) {
+    setShow(false);
+  } else if (tasksData.statusOfPriority === 3) {
+    setShow(false);
+  }
 
   console.log(tasksData);
   return (
     <div className="displaytodos">
       <div className="buttons">
-        <button onClick={() => dispatch(sortTodoAction("low"))}>
+        <button onClick={() => dispatch(sortTodoAction(1))}>
           Low Priority
         </button>
 
-        <button onClick={() => dispatch(sortTodoAction("middle"))}>
+        <button onClick={() => dispatch(sortTodoAction(2))}>
           Medium Priority
         </button>
 
-        <button onClick={() => dispatch(sortTodoAction("high"))}>
+        <button onClick={() => dispatch(sortTodoAction(3))}>
           High Priority
         </button>
       </div>
-      {sort && (
+
+      {show && (
         <div className="displaytodos__wrapper">
           <div className="displaytodos__block">
             <h2>ToDo</h2>
@@ -58,6 +66,7 @@ export const DisplayTodos = (props) => {
                     removeTodo={() => removeTodo(item.id)}
                     updateTodo={() => updateTodo(item)}
                     completeTodo={() => completeTodo(item.id)}
+                    changePriority={() => changePriority(item.statusOfPriority)}
                   />
                 )
               );

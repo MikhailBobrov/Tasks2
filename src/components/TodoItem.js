@@ -6,12 +6,21 @@ import {
   removeTodoAction,
   updateTodoAction,
   completeTodoAction,
+  changeTodoPriorityAction,
 } from "../redux/reducer";
+import { statusOfPriority } from "../redux/constant";
 
 const TodoItem = (props) => {
   const { item } = props;
   const dispatch = useDispatch();
   const inputRef = useRef(true);
+  const classNameLow =
+    statusOfPriority.low === item.statusOfPriority && "card__yellow";
+  const classNameMiddle =
+    statusOfPriority.middle === item.statusOfPriority && "card__green";
+  const classNameHigh =
+    statusOfPriority.high === item.statusOfPriority && "card__red";
+  const className = classNameLow || classNameMiddle || classNameHigh;
 
   const changeFocus = () => {
     inputRef.current.disabled = false;
@@ -29,8 +38,12 @@ const TodoItem = (props) => {
     dispatch(completeTodoAction({ id, completed: completed }));
   };
 
+  const changePriority = (changeStatus, id) => {
+    dispatch(changeTodoPriorityAction({ id, statusOfPriority: changeStatus }));
+  };
+
   return (
-    <li key={item.id} className="card">
+    <li key={item.id} className={`${className} card`}>
       <textarea
         ref={inputRef}
         disabled={inputRef}
@@ -54,6 +67,12 @@ const TodoItem = (props) => {
           onClick={() => dispatch(removeTodoAction(item.id))}
         >
           <IoClose />
+        </button>
+        <button
+          onClick={() => changePriority(Number(prompt()), item.id)}
+          className="card__button"
+        >
+          ChangePriority
         </button>
       </div>
       {item.completed && <span className="completed">done</span>}

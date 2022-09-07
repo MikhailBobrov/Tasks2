@@ -162,10 +162,23 @@ body {
   margin: 0 1rem 1rem 0;
   height: 8rem;
   width: 18rem;
+  border: 3px solid #e1ebfd;
   border-radius: 0.5rem;
   padding: 1rem;
 
   position: relative;
+}
+
+.card__yellow {
+  border-color: yellow;
+}
+
+.card__green {
+  border-color: green;
+}
+
+.card__red {
+  border-color: red;
 }
 
 .card textarea {
@@ -199,6 +212,10 @@ body {
 
 .card .btns button:focus {
   outline: none;
+}
+
+.card .btns .card__button {
+  font-size: 0.5rem;
 }
 
 .completed {

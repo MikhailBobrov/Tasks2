@@ -6,6 +6,7 @@ const REMOVE_TODO = "REMOVETODO";
 const UPDATE_TODO = "UPDATETODO";
 const COMPLETE_TODO = "СOMPLETETODO";
 const SORT_TODO = "SORTTODO";
+const CHANGE_PRIORITY = "CHANGE_PRIORITY";
 
 export const reducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -53,8 +54,22 @@ export const reducer = (state = defaultState, action) => {
       );
       console.log(sortedData);
       return {
-        ...state,
+        // ...state,
         tasks: [...sortedData],
+      };
+    }
+    case CHANGE_PRIORITY: {
+      return {
+        ...state,
+        tasks: state.tasks.map((todo) => {
+          if (todo.id === action.payload.id) {
+            return {
+              ...todo,
+              statusOfPriority: action.payload.statusOfPriority,
+            };
+          }
+          return todo;
+        }),
       };
     }
     default:
@@ -70,3 +85,7 @@ export const completeTodoAction = (payload) => ({
   payload,
 });
 export const sortTodoAction = (payload) => ({ type: SORT_TODO, payload });
+export const changeTodoPriorityAction = (payload) => ({
+  type: CHANGE_PRIORITY,
+  payload,
+});
